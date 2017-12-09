@@ -42,10 +42,12 @@ def set_cookie():
 
 @app.route('/getcookies')
 def get_cookies():
-	name= request.cookies.get('name')
-	age= request.cookies.get('age')
-	return "Name: "+name+"<br>Age: "+age
-
+	if 'name' in request.cookies and 'age' in request.cookies:
+		name= request.cookies.get('name')
+		age= request.cookies.get('age')
+		return "Name: "+name+"<br>Age: "+age
+	else:
+		return "No cookies set"
 @app.route('/robots.txt')
 def deny_req():
 	return send_file('denied.txt')
