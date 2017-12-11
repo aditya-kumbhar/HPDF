@@ -37,7 +37,7 @@ def set_cookie():
 
 	if 'age' not in request.cookies:
 		response.set_cookie('age','20')
-	
+	print('Cookie has been set')
 	return response
 
 @app.route('/getcookies')
@@ -48,6 +48,7 @@ def get_cookies():
 		return "Name: "+name+"<br>Age: "+age
 	else:
 		return "No cookies set"
+
 @app.route('/robots.txt')
 def deny_req():
 	return send_file('denied.txt')
@@ -62,9 +63,6 @@ def ret_img():
 
 @app.route('/input')
 def input():
-	# htmlbody='<form action="/logInput" method="post">Enter input: '
-	# htmlbody+='<input type=text name="t1"><br>'
-	# htmlbody+='<button type=submit>Submit</button></form>'
 	return render_template('input.html')
 
 @app.route('/logInput',methods=['POST','GET'])
@@ -75,6 +73,6 @@ def logInput():
 		flash('Input has been logged')
 	return redirect('/input')
 
-
 if(__name__=='__main__'):
 	app.run(host='0.0.0.0',debug=False,port=8080)
+
